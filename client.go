@@ -11,6 +11,7 @@ import (
 
 // Client is a client for the Sumo API.
 type Client interface {
+	SearchRikishisAPI
 }
 
 type client struct {

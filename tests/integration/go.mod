@@ -1,8 +1,13 @@
-module github.com/sumo-mcp/sumoapi-go
+module tests/integration
 
 go 1.25.0
 
-require github.com/onsi/gomega v1.38.2
+replace github.com/sumo-mcp/sumoapi-go => ../../
+
+require (
+	github.com/onsi/gomega v1.38.2
+	github.com/sumo-mcp/sumoapi-go v0.0.0-00010101000000-000000000000
+)
 
 require (
 	github.com/google/go-cmp v0.7.0 // indirect
