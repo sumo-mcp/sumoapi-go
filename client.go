@@ -13,6 +13,7 @@ import (
 // Client is a client for the Sumo API.
 type Client interface {
 	SearchRikishisAPI
+	GetRikishiAPI
 	ListRankChangesAPI
 	ListShikonaChangesAPI
 	ListMeasurementChangesAPI
