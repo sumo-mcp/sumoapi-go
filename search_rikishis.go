@@ -3,13 +3,12 @@ package sumoapi
 import (
 	"context"
 	"fmt"
-	"net/http"
 	"net/url"
 )
 
 // SearchRikishisAPI defines the methods available for searching Rikishis.
 type SearchRikishisAPI interface {
-	// SearchRikishis calls the /rikishis endpoint.
+	// SearchRikishis calls the GET /api/rikishis endpoint.
 	SearchRikishis(ctx context.Context, req SearchRikishisRequest) (*SearchRikishisResponse, error)
 }
 
@@ -67,5 +66,5 @@ func (c *client) SearchRikishis(ctx context.Context, req SearchRikishisRequest) 
 	if req.Skip > 0 {
 		query.Set("skip", fmt.Sprintf("%d", req.Skip))
 	}
-	return doRequest[SearchRikishisResponse](ctx, c, http.MethodGet, "/rikishis", query)
+	return getObject[SearchRikishisResponse](ctx, c, "/rikishis", query)
 }

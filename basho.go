@@ -12,8 +12,12 @@ type BashoID struct {
 	Month int // Month is 1-12.
 }
 
+func (b BashoID) String() string {
+	return fmt.Sprintf("%04d%02d", b.Year, b.Month)
+}
+
 func (b BashoID) MarshalJSON() ([]byte, error) {
-	return []byte(`"` + fmt.Sprintf("%04d%02d", b.Year, b.Month) + `"`), nil
+	return []byte(`"` + b.String() + `"`), nil
 }
 
 func (b *BashoID) UnmarshalJSON(data []byte) error {
