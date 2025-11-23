@@ -12,20 +12,6 @@ import (
 	"github.com/sumo-mcp/sumoapi-go"
 )
 
-type mockTransport struct {
-	validateRequest func(*http.Request) error
-	response        *http.Response
-}
-
-func (m *mockTransport) RoundTrip(req *http.Request) (*http.Response, error) {
-	if m.validateRequest != nil {
-		if err := m.validateRequest(req); err != nil {
-			return nil, err
-		}
-	}
-	return m.response, nil
-}
-
 func TestClient_SearchRikishis(t *testing.T) {
 	t.Run("search by shikona", func(t *testing.T) {
 		g := NewWithT(t)

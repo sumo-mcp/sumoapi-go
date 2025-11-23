@@ -14,6 +14,7 @@ import (
 type Client interface {
 	SearchRikishisAPI
 	GetRikishiAPI
+	GetRikishiStatsAPI
 	ListRankChangesAPI
 	ListShikonaChangesAPI
 	ListMeasurementChangesAPI
