@@ -456,11 +456,12 @@ func TestClient_SearchRikishis(t *testing.T) {
 			"records": []
 		}`
 
-		ctx := context.WithValue(context.Background(), "test-key", "test-value")
+		type testKey struct{}
+		ctx := context.WithValue(context.Background(), testKey{}, "test-value")
 
 		transport := &mockTransport{
 			validateRequest: func(req *http.Request) error {
-				g.Expect(req.Context().Value("test-key")).To(Equal("test-value"))
+				g.Expect(req.Context().Value(testKey{})).To(Equal("test-value"))
 				return nil
 			},
 			response: &http.Response{
@@ -475,7 +476,6 @@ func TestClient_SearchRikishis(t *testing.T) {
 		g.Expect(err).ToNot(HaveOccurred())
 	})
 
-	// Error path tests
 	t.Run("http request error", func(t *testing.T) {
 		g := NewWithT(t)
 

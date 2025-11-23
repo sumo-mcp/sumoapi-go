@@ -7,11 +7,15 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 // Client is a client for the Sumo API.
 type Client interface {
 	SearchRikishisAPI
+	ListRankChangesAPI
+	ListShikonaChangesAPI
+	ListMeasurementChangesAPI
 }
 
 type client struct {
@@ -39,13 +43,22 @@ func New(opts ...Option) Client {
 	return client
 }
 
-func doRequest[obj any](ctx context.Context, c *client, method, path string, query url.Values) (*obj, error) {
+func (c *client) doRequest(ctx context.Context, method, path string, query url.Values, obj any) ([]byte, error) {
 	u := fmt.Sprintf("https://sumo-api.com/api%s", path)
 	if len(query) > 0 {
 		u = fmt.Sprintf("%s?%s", u, query.Encode())
 	}
 
-	req, err := http.NewRequestWithContext(ctx, method, u, nil)
+	var body io.Reader
+	if obj != nil {
+		b, err := json.Marshal(obj)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling request body: %w", err)
+		}
+		body = strings.NewReader(string(b))
+	}
+
+	req, err := http.NewRequestWithContext(ctx, method, u, body)
 	if err != nil {
 		return nil, fmt.Errorf("error creating http request: %w", err)
 	}
@@ -74,10 +87,36 @@ func doRequest[obj any](ctx context.Context, c *client, method, path string, que
 		return nil, fmt.Errorf("error reading response body: %w", err)
 	}
 
+	return b, nil
+}
+
+func getObject[obj any](ctx context.Context, c *client, path string, query url.Values) (*obj, error) {
+	b, err := c.doRequest(ctx, http.MethodGet, path, query, nil)
+	if err != nil {
+		return nil, err
+	}
 	var o obj
 	if err := json.Unmarshal(b, &o); err != nil {
 		return nil, fmt.Errorf("error unmarshaling response body: %w", err)
 	}
-
 	return &o, nil
+}
+
+func listObjects[obj any](ctx context.Context, c *client, path string, query url.Values) ([]obj, error) {
+	b, err := c.doRequest(ctx, http.MethodGet, path, query, nil)
+	if err != nil {
+		return nil, err
+	}
+	var l []obj
+	if err := json.Unmarshal(b, &l); err != nil {
+		return nil, fmt.Errorf("error unmarshaling response body: %w", err)
+	}
+	return l, nil
+}
+
+func getSortOrder(order string) string {
+	if o := strings.ToLower(strings.TrimSpace(order)); o == "asc" || o == "desc" {
+		return o
+	}
+	return ""
 }
