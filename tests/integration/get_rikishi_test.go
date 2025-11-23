@@ -15,7 +15,7 @@ func TestIntegration_GetRikishi(t *testing.T) {
 	client := sumoapi.New()
 
 	resp, err := client.GetRikishi(context.Background(), sumoapi.GetRikishiRequest{
-		RikishiID:           45,
+		RikishiID:           45, // Terunofuji
 		IncludeRanks:        true,
 		IncludeShikonas:     true,
 		IncludeMeasurements: true,

@@ -15,7 +15,7 @@ func TestIntegration_ListMeasurementChanges(t *testing.T) {
 	client := sumoapi.New()
 
 	resp, err := client.ListMeasurementChanges(context.Background(), sumoapi.ListRikishiChangesRequest{
-		RikishiID: 3081,
+		RikishiID: 3081, // Hakuho
 		BashoID: &sumoapi.BashoID{
 			Year:  2021,
 			Month: 3,
@@ -24,7 +24,7 @@ func TestIntegration_ListMeasurementChanges(t *testing.T) {
 
 	g.Expect(err).ToNot(HaveOccurred())
 	g.Expect(resp).ToNot(BeNil())
-	g.Expect(len(resp)).To(BeNumerically(">", 1)) // There's a bug in the API, the bashoId filter is not working.
+	g.Expect(len(resp)).To(BeNumerically(">", 1)) // Bug: The bashoId filter is not working.
 
 	expectedBashoID := sumoapi.BashoID{Year: 2021, Month: 3}
 

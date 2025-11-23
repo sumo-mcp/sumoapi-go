@@ -6,7 +6,7 @@ import (
 	"net/url"
 )
 
-// GetRikishiAPI defines the methods available for retrieving a single Rikishi.
+// GetRikishiAPI defines the methods available for retrieving a single rikishi.
 type GetRikishiAPI interface {
 	// GetRikishi calls the GET /api/rikishi/{rikishiID} endpoint.
 	GetRikishi(ctx context.Context, req GetRikishiRequest) (*Rikishi, error)
@@ -14,10 +14,10 @@ type GetRikishiAPI interface {
 
 // GetRikishiRequest represents the request parameters for the GetRikishi method.
 type GetRikishiRequest struct {
-	RikishiID           int  `json:"rikishiId" jsonschema:"The unique identifier of the Rikishi to retrieve. Example: 45 = Terunofuji"`
-	IncludeRanks        bool `json:"includeRanks,omitempty" jsonschema:"Whether to include rank records over time in the Rikishi data."`
-	IncludeShikonas     bool `json:"includeShikonas,omitempty" jsonschema:"Whether to include shikona (ring name) records over time in the Rikishi data."`
-	IncludeMeasurements bool `json:"includeMeasurements,omitempty" jsonschema:"Whether to include measurement records over time in the Rikishi data."`
+	RikishiID           int  `json:"rikishiId" jsonschema:"The unique identifier of the rikishi (sumo wrestler) to retrieve. Example: 45 = Terunofuji"`
+	IncludeRanks        bool `json:"includeRanks,omitempty" jsonschema:"Whether to include rank records over time in the rikishi (sumo wrestler) data."`
+	IncludeShikonas     bool `json:"includeShikonas,omitempty" jsonschema:"Whether to include shikona (ring name) records over time in the rikishi (sumo wrestler) data."`
+	IncludeMeasurements bool `json:"includeMeasurements,omitempty" jsonschema:"Whether to include measurement records over time in the rikishi (sumo wrestler) data."`
 }
 
 func (c *client) GetRikishi(ctx context.Context, req GetRikishiRequest) (*Rikishi, error) {

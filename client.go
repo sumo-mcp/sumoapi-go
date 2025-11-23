@@ -12,12 +12,15 @@ import (
 
 // Client is a client for the Sumo API.
 type Client interface {
-	SearchRikishisAPI
+	SearchRikishiAPI
 	GetRikishiAPI
 	GetRikishiStatsAPI
+	ListRikishiMatchesAPI
+	ListRikishiMatchesAgainstOpponentAPI
+	ListKimariteMatchesAPI
+	ListMeasurementChangesAPI
 	ListRankChangesAPI
 	ListShikonaChangesAPI
-	ListMeasurementChangesAPI
 }
 
 type client struct {

@@ -17,7 +17,7 @@ func TestIntegration_ListShikonaChanges(t *testing.T) {
 	// Here we test a specific Rikishi that had shikona changes to make sure the API
 	// is returning exactly one change when filtering by RikishiID and BashoID.
 	resp, err := client.ListShikonaChanges(context.Background(), sumoapi.ListRikishiChangesRequest{
-		RikishiID: 8857,
+		RikishiID: 8857, // Yoshinofuji
 		BashoID: &sumoapi.BashoID{
 			Year:  2025,
 			Month: 11,

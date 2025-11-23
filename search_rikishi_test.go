@@ -12,7 +12,7 @@ import (
 	"github.com/sumo-mcp/sumoapi-go"
 )
 
-func TestClient_SearchRikishis(t *testing.T) {
+func TestClient_SearchRikishi(t *testing.T) {
 	t.Run("search by shikona", func(t *testing.T) {
 		g := NewWithT(t)
 
@@ -44,16 +44,16 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{
 			Shikona: "Terunofuji",
 		})
 
 		g.Expect(err).ToNot(HaveOccurred())
 		g.Expect(resp).ToNot(BeNil())
 		g.Expect(resp.Total).To(Equal(100))
-		g.Expect(resp.Rikishis).To(HaveLen(1))
-		g.Expect(resp.Rikishis[0].ID).To(Equal(1))
-		g.Expect(resp.Rikishis[0].ShikonaEnglish).To(Equal("Terunofuji"))
+		g.Expect(resp.Rikishi).To(HaveLen(1))
+		g.Expect(resp.Rikishi[0].ID).To(Equal(1))
+		g.Expect(resp.Rikishi[0].ShikonaEnglish).To(Equal("Terunofuji"))
 	})
 
 	t.Run("search by heya", func(t *testing.T) {
@@ -80,14 +80,14 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{
 			Heya: "Isegahama",
 		})
 
 		g.Expect(err).ToNot(HaveOccurred())
 		g.Expect(resp).ToNot(BeNil())
 		g.Expect(resp.Total).To(Equal(50))
-		g.Expect(resp.Rikishis).To(BeEmpty())
+		g.Expect(resp.Rikishi).To(BeEmpty())
 	})
 
 	t.Run("search by SumoDB ID", func(t *testing.T) {
@@ -117,14 +117,14 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{
 			SumoDBID: 11927,
 		})
 
 		g.Expect(err).ToNot(HaveOccurred())
 		g.Expect(resp).ToNot(BeNil())
-		g.Expect(resp.Rikishis).To(HaveLen(1))
-		g.Expect(resp.Rikishis[0].SumoDBID).To(Equal(11927))
+		g.Expect(resp.Rikishi).To(HaveLen(1))
+		g.Expect(resp.Rikishi[0].SumoDBID).To(Equal(11927))
 	})
 
 	t.Run("search by official ID", func(t *testing.T) {
@@ -154,14 +154,14 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{
 			OfficialID: 3321,
 		})
 
 		g.Expect(err).ToNot(HaveOccurred())
 		g.Expect(resp).ToNot(BeNil())
-		g.Expect(resp.Rikishis).To(HaveLen(1))
-		g.Expect(resp.Rikishis[0].OfficialID).To(Equal(3321))
+		g.Expect(resp.Rikishi).To(HaveLen(1))
+		g.Expect(resp.Rikishi[0].OfficialID).To(Equal(3321))
 	})
 
 	t.Run("search with include retired flag", func(t *testing.T) {
@@ -186,7 +186,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{
 			IncludeRetired: true,
 		})
 
@@ -216,7 +216,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{
 			IncludeMeasurements: true,
 		})
 
@@ -246,7 +246,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{
 			IncludeRanks: true,
 		})
 
@@ -276,7 +276,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{
 			IncludeShikonas: true,
 		})
 
@@ -306,7 +306,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{
 			Limit: 10,
 		})
 
@@ -337,7 +337,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{
 			Skip: 20,
 		})
 
@@ -376,7 +376,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{
 			Shikona:             "Hakuho",
 			Heya:                "Miyagino",
 			IncludeRetired:      true,
@@ -426,7 +426,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{})
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{})
 
 		g.Expect(err).ToNot(HaveOccurred())
 		g.Expect(resp).ToNot(BeNil())
@@ -457,7 +457,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		_, err := client.SearchRikishis(ctx, sumoapi.SearchRikishisRequest{})
+		_, err := client.SearchRikishi(ctx, sumoapi.SearchRikishiRequest{})
 
 		g.Expect(err).ToNot(HaveOccurred())
 	})
@@ -472,7 +472,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{})
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{})
 
 		g.Expect(err).To(HaveOccurred())
 		g.Expect(err.Error()).To(ContainSubstring("error making http request"))
@@ -490,7 +490,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{})
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{})
 
 		g.Expect(err).To(HaveOccurred())
 		g.Expect(err.Error()).To(ContainSubstring("received HTTP 404 response"))
@@ -509,7 +509,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{})
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{})
 
 		g.Expect(err).To(HaveOccurred())
 		g.Expect(err.Error()).To(ContainSubstring("received HTTP 500 response with empty body"))
@@ -527,7 +527,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{})
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{})
 
 		g.Expect(err).To(HaveOccurred())
 		g.Expect(err.Error()).To(ContainSubstring("received HTTP 400 response"))
@@ -546,7 +546,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{})
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{})
 
 		g.Expect(err).To(HaveOccurred())
 		g.Expect(err.Error()).To(ContainSubstring("error unmarshaling response body"))
@@ -564,7 +564,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{})
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{})
 
 		g.Expect(err).To(HaveOccurred())
 		g.Expect(err.Error()).To(ContainSubstring("error unmarshaling response body"))
@@ -582,7 +582,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{})
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{})
 
 		g.Expect(err).To(HaveOccurred())
 		g.Expect(err.Error()).To(ContainSubstring("received HTTP 403 response"))
@@ -601,7 +601,7 @@ func TestClient_SearchRikishis(t *testing.T) {
 		}
 
 		client := sumoapi.New(sumoapi.WithHTTPClient(&http.Client{Transport: transport}))
-		resp, err := client.SearchRikishis(context.Background(), sumoapi.SearchRikishisRequest{})
+		resp, err := client.SearchRikishi(context.Background(), sumoapi.SearchRikishiRequest{})
 
 		g.Expect(err).To(HaveOccurred())
 		g.Expect(err.Error()).To(ContainSubstring("received HTTP 503 response"))

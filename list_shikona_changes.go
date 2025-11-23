@@ -2,7 +2,7 @@ package sumoapi
 
 import "context"
 
-// ListShikonaChangesAPI defines the methods available for listing Rikishi shikona (ring name) changes across bashos (sumo tournaments).
+// ListShikonaChangesAPI defines the methods available for listing rikishi shikona changes across bashos.
 type ListShikonaChangesAPI interface {
 	// ListShikonaChanges calls the GET /api/shikonas endpoint.
 	ListShikonaChanges(ctx context.Context, req ListRikishiChangesRequest) ([]Shikona, error)
