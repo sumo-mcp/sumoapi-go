@@ -14,6 +14,8 @@ func TestIntegration_ListRankChanges(t *testing.T) {
 
 	client := sumoapi.New()
 
+	// Here we test a specific Rikishi that had rank changes to make sure the API
+	// is returning exactly one change when filtering by RikishiID and BashoID.
 	resp, err := client.ListRankChanges(context.Background(), sumoapi.ListRikishiChangesRequest{
 		RikishiID: 3081,
 		BashoID: &sumoapi.BashoID{
