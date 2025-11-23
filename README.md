@@ -1,6 +1,7 @@
 # sumoapi-go
 
-[![Test Integration](https://github.com/sumo-mcp/sumoapi-go/actions/workflows/test-integration.yaml/badge.svg)](https://github.com/sumo-mcp/sumoapi-go/actions/workflows/test-integration.yaml)
+[![release](https://img.shields.io/github/v/release/sumo-mcp/sumoapi-go?sort=semver)](https://github.com/sumo-mcp/sumoapi-go/releases/latest)
+[![integration](https://github.com/sumo-mcp/sumoapi-go/actions/workflows/test-integration.yaml/badge.svg)](https://github.com/sumo-mcp/sumoapi-go/actions/workflows/test-integration.yaml)
 
 A Go SDK for https://sumo-api.com.
 
