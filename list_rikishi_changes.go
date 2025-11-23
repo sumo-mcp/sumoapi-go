@@ -8,9 +8,9 @@ import (
 
 // ListRikishiChangesRequest represents a request to list Rikishi changes with optional filters.
 type ListRikishiChangesRequest struct {
-	RikishiID int      `json:"rikishiId,omitempty" jsonschema:"The ID of the rikishi whose changes are to be listed."`
-	BashoID   *BashoID `json:"bashoId,omitempty" jsonschema:"The ID of the basho for which rikishi changes are to be listed."`
-	SortOrder string   `json:"sortOrder,omitempty" jsonschema:"The order in which to sort the results by Basho (sumo tournament). Valid values are 'asc' for ascending and 'desc' for descending. Default is 'desc'."`
+	RikishiID int      `json:"rikishiId,omitempty" jsonschema:"The ID of the rikishi (sumo wrestler) whose changes are to be listed."`
+	BashoID   *BashoID `json:"bashoId,omitempty" jsonschema:"The ID of the basho (sumo tournament) for which rikishi (sumo wrestler) changes are to be listed."`
+	SortOrder string   `json:"sortOrder,omitempty" jsonschema:"The order in which to sort the results by basho (sumo tournament). Valid values are 'asc' for ascending and 'desc' for descending. Default is 'desc'."`
 }
 
 func listRikishiChanges[obj any](ctx context.Context, c *client, path string, req ListRikishiChangesRequest) ([]obj, error) {
