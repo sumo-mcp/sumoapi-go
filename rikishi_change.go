@@ -6,17 +6,21 @@ import (
 	"strconv"
 )
 
-// RikishiChangeID represents the unique identifier for a Rikishi change in a specific Basho (sumo tournament).
+// RikishiChangeID represents the unique identifier for a rikishi change in a specific basho.
 type RikishiChangeID struct {
 	BashoID
 	RikishiID int
 }
 
-func (b RikishiChangeID) MarshalJSON() ([]byte, error) {
-	return []byte(`"` + fmt.Sprintf("%04d%02d-%d", b.Year, b.Month, b.RikishiID) + `"`), nil
+func (r RikishiChangeID) String() string {
+	return fmt.Sprintf("%s-%d", r.BashoID.String(), r.RikishiID)
 }
 
-func (b *RikishiChangeID) UnmarshalJSON(data []byte) error {
+func (r RikishiChangeID) MarshalJSON() ([]byte, error) {
+	return []byte(`"` + r.String() + `"`), nil
+}
+
+func (r *RikishiChangeID) UnmarshalJSON(data []byte) error {
 	var s string
 	if err := json.Unmarshal(data, &s); err != nil {
 		return fmt.Errorf("error unmarshaling RikishiChangeID: %w", err)
@@ -24,20 +28,15 @@ func (b *RikishiChangeID) UnmarshalJSON(data []byte) error {
 	if len(s) < 7 {
 		return fmt.Errorf("invalid RikishiChangeID format: %s", s)
 	}
-	year, err := strconv.Atoi(s[0:4])
-	if err != nil {
-		return fmt.Errorf("error parsing year from RikishiChangeID: %w", err)
+	var bashoID BashoID
+	if err := bashoID.UnmarshalJSON([]byte(`"` + s[0:6] + `"`)); err != nil {
+		return fmt.Errorf("error parsing BashoID from RikishiChangeID: %w", err)
 	}
-	month, err := strconv.Atoi(s[4:6])
-	if err != nil {
-		return fmt.Errorf("error parsing month from RikishiChangeID: %w", err)
-	}
-	b.Year = year
-	b.Month = month
+	r.BashoID = bashoID
 	rikishiID, err := strconv.Atoi(s[7:])
 	if err != nil {
 		return fmt.Errorf("error parsing RikishiID from RikishiChangeID: %w", err)
 	}
-	b.RikishiID = rikishiID
+	r.RikishiID = rikishiID
 	return nil
 }

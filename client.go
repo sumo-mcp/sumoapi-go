@@ -17,6 +17,7 @@ type Client interface {
 	GetRikishiStatsAPI
 	ListRikishiMatchesAPI
 	ListRikishiMatchesAgainstOpponentAPI
+	ListKimariteAPI
 	ListKimariteMatchesAPI
 	ListMeasurementChangesAPI
 	ListRankChangesAPI

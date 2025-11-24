@@ -7,11 +7,11 @@ import (
 
 // Match represents a sumo match.
 type Match struct {
-	// ID is optional because it's not returned by the APIs for listing rikishi matches.
-	ID             *MatchID `json:"id,omitempty" jsonschema:"The unique identifier for the match in the format YYYYMM-D-NUM-EASTID-WESTID."`
+	// ID is optional because it's not returned by the APIs for listing rikishi matches (possibly a bug).
+	ID             *MatchID `json:"id,omitempty" jsonschema:"The unique identifier for the match in the format YYYYMM-{day}-{matchNo}-{eastId}-{westId}."`
 	BashoID        BashoID  `json:"bashoId" jsonschema:"The ID of the basho (sumo tournament) in which the match took place, in the format YYYYMM."`
 	Division       string   `json:"division" jsonschema:"The division in which the match took place."`
-	Day            int      `json:"day" jsonschema:"The day of the basho (sumo tournament) on which the match took place."`
+	Day            int      `json:"day" jsonschema:"The day of the basho (sumo tournament) on which the match took place (1-15), or a playoff match starting from 16."`
 	MatchNumber    int      `json:"matchNo,omitempty" jsonschema:"The number of the match on the given day."`
 	EastID         int      `json:"eastId,omitempty" jsonschema:"The unique identifier for the rikishi (sumo wrestler) on the east side."`
 	EastShikona    string   `json:"eastShikona,omitempty" jsonschema:"The shikona (ring name) in English of the rikishi (sumo wrestler) on the east side."`
@@ -47,14 +47,14 @@ func (m *MatchID) UnmarshalJSON(data []byte) error {
 	if err := json.Unmarshal(data, &s); err != nil {
 		return fmt.Errorf("error unmarshaling MatchID: %w", err)
 	}
-	if s == "" { // Match ID is optional in some APIs.
+	if s == "" { // Match ID is optional.
 		*m = MatchID{}
 		return nil
 	}
-	var bashoID BashoID
 	if len(s) < 11 {
 		return fmt.Errorf("invalid MatchID format: %s", s)
 	}
+	var bashoID BashoID
 	if err := bashoID.UnmarshalJSON([]byte(`"` + s[0:6] + `"`)); err != nil {
 		return fmt.Errorf("error parsing BashoID from MatchID: %w", err)
 	}

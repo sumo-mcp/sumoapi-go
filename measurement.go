@@ -1,6 +1,6 @@
 package sumoapi
 
-// Measurement represents a sumo wrestler's measurement in a specific Basho (sumo tournament).
+// Measurement represents a rikishi's measurement in a specific basho.
 type Measurement struct {
 	ID        RikishiChangeID `json:"id" jsonschema:"The unique identifier for the measurement in the format {bashoID}-{rikishiID} where {bashoID} is in the format YYYYMM and {rikishiID} is the unique identifier for the rikishi in the API."`
 	BashoID   BashoID         `json:"bashoId" jsonschema:"The ID of the basho (sumo tournament) in the format YYYYMM."`
