@@ -1,6 +1,6 @@
 package sumoapi
 
-// Shikona represents a sumo wrestler's shikona (ring name) in a specific Basho (sumo tournament).
+// Shikona represents a rikishi's shikona in a specific basho.
 type Shikona struct {
 	ID              RikishiChangeID `json:"id" jsonschema:"The unique identifier for the shikona in the format {bashoID}-{rikishiID} where {bashoID} is in the format YYYYMM and {rikishiID} is the unique identifier for the rikishi in the API."`
 	BashoID         BashoID         `json:"bashoId" jsonschema:"The ID of the basho (sumo tournament) in the format YYYYMM."`

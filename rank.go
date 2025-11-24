@@ -1,6 +1,6 @@
 package sumoapi
 
-// Rank represents a sumo wrestler's rank in a specific Basho (sumo tournament).
+// Rank represents a rikishi's rank in a specific basho.
 type Rank struct {
 	ID                RikishiChangeID `json:"id" jsonschema:"The unique identifier for the rank in the format {bashoID}-{rikishiID} where {bashoID} is in the format YYYYMM and {rikishiID} is the unique identifier for the rikishi in the API."`
 	BashoID           BashoID         `json:"bashoId" jsonschema:"The ID of the basho (sumo tournament) in the format YYYYMM."`
