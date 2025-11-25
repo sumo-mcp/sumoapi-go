@@ -4,7 +4,27 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
+	"time"
 )
+
+// Basho represents a sumo tournament.
+type Basho struct {
+	ID            BashoID      `json:"date" jsonschema:"The unique identifier for the basho (sumo tournament), in the format YYYYMM."`
+	StartDate     *time.Time   `json:"startDate,omitempty" jsonschema:"The starting date of the basho (sumo tournament)."`
+	EndDate       *time.Time   `json:"endDate,omitempty" jsonschema:"The ending date of the basho (sumo tournament)."`
+	Yusho         []BashoPrize `json:"yusho,omitempty" jsonschema:"A list of yusho (tournament championship) prizes awarded to rikishi (sumo wrestlers) in the basho (sumo tournament)."`
+	SpecialPrizes []BashoPrize `json:"specialPrizes,omitempty" jsonschema:"A list of special prizes awarded to rikishi (sumo wrestlers) in the basho (sumo tournament)."`
+	Torikumi      []Match      `json:"torikumi,omitempty" jsonschema:"A torikumi (bout schedule) that took or will take place for a specific day of a specific division of the basho (sumo tournament)."`
+}
+
+// BashoPrize represents a prize awarded to a rikishi in a basho.
+// It can be a yusho or a special prize.
+type BashoPrize struct {
+	Type            string `json:"type" jsonschema:"The type of prize. When the prize is a yusho (tournament championship), the value is the name of the tournament division. When the prize is a special prize, the value is one of 'Shukun-sho' (outstanding performance), 'Kanto-sho' (fighting spirit), or 'Gino-sho' (technique)."`
+	RikishiID       int    `json:"rikishiId" jsonschema:"The unique identifier of the rikishi (sumo wrestler) who received the prize."`
+	ShikonaEnglish  string `json:"shikonaEn,omitempty" jsonschema:"The shikona (ring name) of the rikishi (sumo wrestler) in English."`
+	ShikonaJapanese string `json:"shikonaJp,omitempty" jsonschema:"The shikona (ring name) of the rikishi (sumo wrestler) in Japanese."`
+}
 
 // BashoID represents the unique identifier for a basho.
 type BashoID struct {
