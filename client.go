@@ -18,6 +18,7 @@ type Client interface {
 	ListRikishiMatchesAPI
 	ListRikishiMatchesAgainstOpponentAPI
 	GetBashoAPI
+	GetBanzukeAPI
 	GetBashoWithTorikumiAPI
 	ListKimariteAPI
 	ListKimariteMatchesAPI
@@ -69,6 +70,9 @@ func (c *client) doRequest(ctx context.Context, method, path string, query url.V
 	req, err := http.NewRequestWithContext(ctx, method, u, body)
 	if err != nil {
 		return nil, fmt.Errorf("error creating http request: %w", err)
+	}
+	if obj != nil {
+		req.Header.Set("Content-Type", "application/json")
 	}
 
 	resp, err := c.httpClient.Do(req)
