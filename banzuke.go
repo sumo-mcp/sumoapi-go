@@ -4,8 +4,8 @@ package sumoapi
 type Banzuke struct {
 	BashoID  BashoID          `json:"bashoId" jsonschema:"The unique identifier for the basho (sumo tournament)."`
 	Division string           `json:"division" jsonschema:"The division of the basho (sumo tournament). One of Makuuchi, Juryo, Makushita, Sandanme, Jonidan, Jonokuchi."`
-	East     []RikishiBanzuke `json:"east" jsonschema:"The banzuke (ranking list) for the east side of the division."`
-	West     []RikishiBanzuke `json:"west" jsonschema:"The banzuke (ranking list) for the west side of the division."`
+	East     []RikishiBanzuke `json:"east,omitempty" jsonschema:"The banzuke (ranking list) for the east side of the division."`
+	West     []RikishiBanzuke `json:"west,omitempty" jsonschema:"The banzuke (ranking list) for the west side of the division."`
 }
 
 // RikishiBanzuke represents a rikishi's ranking information in a basho division.
@@ -19,7 +19,7 @@ type RikishiBanzuke struct {
 	Wins                  int                   `json:"wins" jsonschema:"The number of wins the rikishi (sumo wrestler) achieved in the specific basho (sumo tournament)."`
 	Losses                int                   `json:"losses" jsonschema:"The number of losses the rikishi (sumo wrestler) had in the specific basho (sumo tournament)."`
 	Absences              int                   `json:"absences" jsonschema:"The number of absences the rikishi (sumo wrestler) had in the specific basho (sumo tournament)."`
-	Matches               []RikishiBanzukeMatch `json:"record" jsonschema:"The list of matches the rikishi (sumo wrestler) had or will have in the specific basho (sumo tournament)."`
+	Matches               []RikishiBanzukeMatch `json:"record,omitempty" jsonschema:"The list of matches the rikishi (sumo wrestler) had or will have in the specific basho (sumo tournament)."`
 }
 
 // RikishiBanzukeMatch represents a match against an opponent in the banzuke.

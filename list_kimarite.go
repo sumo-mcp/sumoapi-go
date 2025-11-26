@@ -26,7 +26,7 @@ type ListKimariteResponse struct {
 	Skip      int        `json:"skip" jsonschema:"The number of results that were skipped over."`
 	SortField string     `json:"sortField" jsonschema:"The field by which the results are sorted. Values are 'kimarite', 'count' and 'lastUsage'."`
 	SortOrder string     `json:"sortOrder" jsonschema:"The order in which the results are sorted by the sort field. Values are 'asc' for ascending and 'desc' for descending."`
-	Kimarite  []Kimarite `json:"records" jsonschema:"The list of kimarite (winning technique) records matching the filters."`
+	Kimarite  []Kimarite `json:"records,omitempty" jsonschema:"The list of kimarite (winning technique) records matching the filters."`
 }
 
 func (c *client) ListKimarite(ctx context.Context, req ListKimariteRequest) (*ListKimariteResponse, error) {
