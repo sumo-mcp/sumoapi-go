@@ -34,7 +34,7 @@ type SearchRikishiResponse struct {
 	Limit   int       `json:"limit" jsonschema:"The maximum number of results that were returned."`
 	Skip    int       `json:"skip" jsonschema:"The number of results that were skipped over."`
 	Total   int       `json:"total" jsonschema:"The total number of matching results."`
-	Rikishi []Rikishi `json:"records" jsonschema:"The list of rikishi (sumo wrestlers) matching the search criteria."`
+	Rikishi []Rikishi `json:"records,omitempty" jsonschema:"The list of rikishi (sumo wrestlers) matching the search criteria."`
 }
 
 func (c *client) SearchRikishi(ctx context.Context, req SearchRikishiRequest) (*SearchRikishiResponse, error) {

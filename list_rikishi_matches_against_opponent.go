@@ -35,7 +35,7 @@ type ListRikishiMatchesAgainstOpponentResponse struct {
 	Limit          int            `json:"limit" jsonschema:"The maximum number of results that were returned."`
 	Skip           int            `json:"skip" jsonschema:"The number of results that were skipped over."`
 	Total          int            `json:"total" jsonschema:"The total number of matching results."`
-	Matches        []Match        `json:"matches" jsonschema:"The list of matches matching the filters."`
+	Matches        []Match        `json:"matches,omitempty" jsonschema:"The list of matches matching the filters."`
 }
 
 func (c *client) ListRikishiMatchesAgainstOpponent(ctx context.Context, req ListRikishiMatchesAgainstOpponentRequest) (*ListRikishiMatchesAgainstOpponentResponse, error) {
