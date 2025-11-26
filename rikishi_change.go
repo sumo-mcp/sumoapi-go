@@ -3,13 +3,20 @@ package sumoapi
 import (
 	"encoding/json"
 	"fmt"
+	"reflect"
 	"strconv"
+
+	"github.com/google/jsonschema-go/jsonschema"
 )
 
 // RikishiChangeID represents the unique identifier for a rikishi change in a specific basho.
 type RikishiChangeID struct {
 	BashoID
 	RikishiID int
+}
+
+func init() {
+	typeSchemas[reflect.TypeFor[RikishiChangeID]()] = &jsonschema.Schema{Type: "string"}
 }
 
 func (r RikishiChangeID) String() string {

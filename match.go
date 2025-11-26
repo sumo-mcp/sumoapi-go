@@ -3,6 +3,9 @@ package sumoapi
 import (
 	"encoding/json"
 	"fmt"
+	"reflect"
+
+	"github.com/google/jsonschema-go/jsonschema"
 )
 
 // Match represents a sumo match.
@@ -32,6 +35,10 @@ type MatchID struct {
 	MatchNumber int
 	EastID      int
 	WestID      int
+}
+
+func init() {
+	typeSchemas[reflect.TypeFor[MatchID]()] = &jsonschema.Schema{Type: "string"}
 }
 
 func (m MatchID) String() string {

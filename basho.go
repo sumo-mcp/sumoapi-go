@@ -3,8 +3,11 @@ package sumoapi
 import (
 	"encoding/json"
 	"fmt"
+	"reflect"
 	"strconv"
 	"time"
+
+	"github.com/google/jsonschema-go/jsonschema"
 )
 
 // Basho represents a sumo tournament.
@@ -36,6 +39,11 @@ type BashoID struct {
 type BashoDayID struct {
 	BashoID
 	Day int
+}
+
+func init() {
+	typeSchemas[reflect.TypeFor[BashoID]()] = &jsonschema.Schema{Type: "string"}
+	typeSchemas[reflect.TypeFor[BashoDayID]()] = &jsonschema.Schema{Type: "string"}
 }
 
 func (b BashoID) String() string {
