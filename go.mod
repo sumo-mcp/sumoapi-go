@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/google/jsonschema-go v0.3.0
-	github.com/onsi/gomega v1.38.2
+	github.com/onsi/gomega v1.38.3
 )
 
 require (
