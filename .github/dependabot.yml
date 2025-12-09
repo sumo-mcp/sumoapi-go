@@ -5,7 +5,9 @@ multi-ecosystem-groups:
       interval: weekly
 updates:
 - package-ecosystem: gomod
-  directory: /
+  directories:
+  - /
+  - /tests/integration
   patterns: ["*"]
   multi-ecosystem-group: project
 - package-ecosystem: github-actions
