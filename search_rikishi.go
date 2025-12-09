@@ -9,9 +9,6 @@ import (
 // SearchRikishiAPI defines the methods available for searching rikishi.
 type SearchRikishiAPI interface {
 	// SearchRikishi calls the GET /api/rikishis endpoint.
-	//
-	// Documented bugs:
-	//   - The API always returns the overall total number of rikishi in the database, instead of the total number of matching results like in the other endpoints.
 	SearchRikishi(ctx context.Context, req SearchRikishiRequest) (*SearchRikishiResponse, error)
 }
 
