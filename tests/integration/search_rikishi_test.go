@@ -27,10 +27,8 @@ func TestIntegration_SearchRikishi(t *testing.T) {
 	g.Expect(resp).ToNot(BeNil())
 	g.Expect(resp.Limit).To(Equal(1))
 	g.Expect(resp.Skip).To(Equal(0))
+	g.Expect(resp.Total).To(Equal(1))
 	g.Expect(resp.Rikishi).To(HaveLen(1))
-
-	// Bug: The total is always the overall total amount of rikishi in the database.
-	g.Expect(resp.Total).To(BeNumerically(">", 9000))
 
 	hakuho := resp.Rikishi[0]
 	g.Expect(hakuho.ShikonaEnglish).To(Equal("Hakuho Sho"))
