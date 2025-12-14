@@ -8,9 +8,6 @@ import (
 // GetBashoWithTorikumiAPI defines the methods available for retrieving a basho.
 type GetBashoWithTorikumiAPI interface {
 	// GetBashoWithTorikumi calls the GET /api/basho/{bashoID}/torikumi/{division}/{day} endpoint.
-	//
-	// Documented bugs:
-	//   - There's a skew in match numbering: the number of the match in the match ID starts at 0, while the matchNo field starts at 1.
 	GetBashoWithTorikumi(ctx context.Context, req GetBashoWithTorikumiRequest) (*Basho, error)
 }
 
