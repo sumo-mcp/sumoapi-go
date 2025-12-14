@@ -42,7 +42,7 @@ func TestIntegration_GetBashoWithTorikumi(t *testing.T) {
 	g.Expect(match.ID).ToNot(BeNil())
 	g.Expect(match.ID.BashoID).To(Equal(bashoID))
 	g.Expect(match.ID.Day).To(Equal(1))
-	g.Expect(match.ID.MatchNumber).To(Equal(0)) // Bug: The match number in the ID starts at 0.
+	g.Expect(match.ID.MatchNumber).To(Equal(1))
 	g.Expect(match.ID.EastID).To(Equal(111))
 	g.Expect(match.ID.WestID).To(Equal(164))
 	g.Expect(match.BashoID).To(Equal(bashoID))
@@ -62,7 +62,7 @@ func TestIntegration_GetBashoWithTorikumi(t *testing.T) {
 
 	lastMatch := resp.Torikumi[20]
 	g.Expect(lastMatch.ID).ToNot(BeNil())
-	g.Expect(lastMatch.ID.MatchNumber).To(Equal(20)) // Bug: The match number in the ID starts at 0.
+	g.Expect(lastMatch.ID.MatchNumber).To(Equal(21))
 	g.Expect(lastMatch.MatchNumber).To(Equal(21))
 	g.Expect(lastMatch.EastID).To(Equal(8850))
 	g.Expect(lastMatch.EastShikona).To(Equal("Onosato"))
