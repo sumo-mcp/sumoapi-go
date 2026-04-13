@@ -11,6 +11,8 @@ type ListRikishiChangesRequest struct {
 	RikishiID int      `json:"rikishiId,omitempty" jsonschema:"The ID of the rikishi (sumo wrestler) whose changes are to be listed. Cannot be used together with bashoId."`
 	BashoID   *BashoID `json:"bashoId,omitempty" jsonschema:"The ID of the basho (sumo tournament) for which rikishi (sumo wrestler) changes are to be listed. Cannot be used together with rikishiId."`
 	SortOrder string   `json:"sortOrder,omitempty" jsonschema:"The order in which to sort the results by basho (sumo tournament). Valid values are 'asc' for ascending and 'desc' for descending. Default is 'desc'."`
+	Limit     int      `json:"limit,omitempty" jsonschema:"The maximum number of results to return."`
+	Skip      int      `json:"skip,omitempty" jsonschema:"The number of results to skip over for pagination."`
 }
 
 func listRikishiChanges[obj any](ctx context.Context, c *client, path string, req ListRikishiChangesRequest) ([]obj, error) {
@@ -23,6 +25,12 @@ func listRikishiChanges[obj any](ctx context.Context, c *client, path string, re
 	}
 	if order := getSortOrder(req.SortOrder); order != "" {
 		query.Set("sortOrder", order)
+	}
+	if req.Limit > 0 {
+		query.Set("limit", fmt.Sprint(req.Limit))
+	}
+	if req.Skip > 0 {
+		query.Set("skip", fmt.Sprint(req.Skip))
 	}
 	return listObjects[obj](ctx, c, path, query)
 }
