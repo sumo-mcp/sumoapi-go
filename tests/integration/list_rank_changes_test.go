@@ -70,23 +70,12 @@ func TestIntegration_ListRankChanges(t *testing.T) {
 
 		g.Expect(resp).To(HaveLen(611))
 
-		// The /ranks endpoint does not return basho-scoped results in any
-		// deterministic order (the first record changes depending on the
-		// limit value), so assert membership rather than position. Pagination
-		// still yields all 611 unique records.
-		g.Expect(resp).To(ContainElement(sumoapi.Rank{
-			ID:                sumoapi.RikishiChangeID{BashoID: bashoID, RikishiID: 8850},
+		g.Expect(resp[0]).To(Equal(sumoapi.Rank{
+			ID:                sumoapi.RikishiChangeID{BashoID: bashoID, RikishiID: 19},
 			BashoID:           bashoID,
-			RikishiID:         8850,
-			HumanReadableName: "Yokozuna 1 East",
+			RikishiID:         19,
+			HumanReadableName: "Yokozuna 1 West",
 			NumericName:       101,
-		}))
-		g.Expect(resp).To(ContainElement(sumoapi.Rank{
-			ID:                sumoapi.RikishiChangeID{BashoID: bashoID, RikishiID: 9101},
-			BashoID:           bashoID,
-			RikishiID:         9101,
-			HumanReadableName: "Jonokuchi 26 East",
-			NumericName:       1026,
 		}))
 	})
 }
