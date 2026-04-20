@@ -30,7 +30,7 @@ type Client interface {
 // Error represents an error returned by the Sumo API.
 type Error struct {
 	StatusCode  int
-	Body        []byte
+	Body        string
 	ReadBodyErr error
 }
 
@@ -41,7 +41,7 @@ func (e *Error) Error() string {
 	case len(e.Body) == 0:
 		return fmt.Sprintf("sumoapi: received HTTP %d response with empty body", e.StatusCode)
 	default:
-		return fmt.Sprintf("sumoapi: received HTTP %d response: %s", e.StatusCode, string(e.Body))
+		return fmt.Sprintf("sumoapi: received HTTP %d response: %s", e.StatusCode, e.Body)
 	}
 }
 
@@ -104,7 +104,7 @@ func (c *client) doRequest(ctx context.Context, method, path string, query url.V
 		b, readErr := io.ReadAll(resp.Body)
 		return nil, &Error{
 			StatusCode:  status,
-			Body:        b,
+			Body:        string(b),
 			ReadBodyErr: readErr,
 		}
 	}

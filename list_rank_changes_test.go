@@ -167,6 +167,8 @@ func TestClient_ListRankChanges(t *testing.T) {
 				g.Expect(query.Get("rikishiId")).To(Equal("123"))
 				g.Expect(query.Get("bashoId")).To(Equal("202501"))
 				g.Expect(query.Get("sortOrder")).To(Equal("asc"))
+				g.Expect(query.Get("limit")).To(Equal("50"))
+				g.Expect(query.Get("skip")).To(Equal("10"))
 				return nil
 			},
 			response: &http.Response{
@@ -180,6 +182,8 @@ func TestClient_ListRankChanges(t *testing.T) {
 			RikishiID: 123,
 			BashoID:   &bashoID,
 			SortOrder: "asc",
+			Limit:     50,
+			Skip:      10,
 		})
 
 		g.Expect(err).ToNot(HaveOccurred())
@@ -200,6 +204,8 @@ func TestClient_ListRankChanges(t *testing.T) {
 				g.Expect(query.Has("rikishiId")).To(BeFalse())
 				g.Expect(query.Has("bashoId")).To(BeFalse())
 				g.Expect(query.Has("sortOrder")).To(BeFalse())
+				g.Expect(query.Has("limit")).To(BeFalse())
+				g.Expect(query.Has("skip")).To(BeFalse())
 				return nil
 			},
 			response: &http.Response{
