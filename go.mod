@@ -3,7 +3,7 @@ module github.com/sumo-mcp/sumoapi-go
 go 1.25.0
 
 require (
-	github.com/google/jsonschema-go v0.4.2
+	github.com/google/jsonschema-go v0.4.3
 	github.com/onsi/gomega v1.39.1
 )
 
